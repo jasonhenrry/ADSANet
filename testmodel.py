@@ -40,7 +40,6 @@ class ToTensor(object):
 path=(['./saved_model/model-50']) 
 
 dir = './data/TestDataset/'
-dcnt = 0
 
 for dataset in test_datasets:
     if brkf==True:
@@ -48,9 +47,8 @@ for dataset in test_datasets:
 
     save_path = './results/{}/'.format(dataset)
     os.makedirs(save_path, exist_ok=True)
-    dataset_path =  dir+test_datasets[dcnt]+'/masks'
-    dataset_path_pre = dir+test_datasets[dcnt]+'/images'
-    dcnt = dcnt+1
+    dataset_path =  dir+dataset+'/masks'
+    dataset_path_pre = dir+dataset+'/images'
     sal_root = dataset_path_pre  +'/'
     gt_root = dataset_path  +'/'
     test_loader = test_dataset(sal_root, gt_root)
