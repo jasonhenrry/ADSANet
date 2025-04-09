@@ -14,10 +14,7 @@ You can download the results at [Google Drive Link](https://drive.google.com/fil
 You can download the trained ADSANet model at [Google Drive Link](https://drive.google.com/file/d/1eaAB2q_2MgdJmfduC7gv7WesSigc_sgc/view?usp=drive_link)
 
 # Prerequisites
-Python 3.11
-
-Pytorch 2.3.1
-
-OpenCV 4.10
-
-Numpy 1.26
+Python 3.11  
+Pytorch 2.3.1  
+OpenCV 4.10  
+Numpy 1.26  
