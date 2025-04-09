@@ -4,7 +4,7 @@ from numpy.core.fromnumeric import squeeze
 import torch
 import cv2
 from utils.test_data import test_dataset
-from utils.metric import cal_biou, cal_mae,cal_fm, cal_prec, cal_sens,cal_sm,cal_em, cal_spec,cal_wfm, cal_dice, cal_iou,cal_ber,cal_acc
+from utils.metric import cal_biou, cal_mae, cal_fm, cal_prec, cal_sens, cal_sm, cal_em, cal_spec, cal_wfm, cal_dice, cal_iou, cal_ber, cal_acc
 from model.ADSANet import ADSANet
 import torch.nn.functional as F
 import os
@@ -39,25 +39,22 @@ class ToTensor(object):
 
 path=(['./saved_model/model-50']) 
 
-
 dir = './data/TestDataset/'
 dcnt = 0
-
 
 for dataset in test_datasets:
     if brkf==True:
         break
 
-    save_path = './results/nCrf/{}/'.format(dataset)
+    save_path = './results/{}/'.format(dataset)
     os.makedirs(save_path, exist_ok=True)
-    # print(dcnt)
     dataset_path =  dir+test_datasets[dcnt]+'/masks'
     dataset_path_pre = dir+test_datasets[dcnt]+'/images'
     dcnt = dcnt+1
     sal_root = dataset_path_pre  +'/'
     gt_root = dataset_path  +'/'
     test_loader = test_dataset(sal_root, gt_root)
-    mae,fm,sm,em,wfm, m_dice, m_piou,m_biou,ber,acc, spec, sens, prec= cal_mae(),cal_fm(test_loader.size),cal_sm(),cal_em(),cal_wfm(), cal_dice(), cal_iou(),cal_biou(),cal_ber(),cal_acc(), cal_spec(),cal_sens(),cal_prec()
+    mae, sm, em, wfm, m_dice, m_piou= cal_mae(), cal_sm(), cal_em(), cal_wfm(), cal_dice(), cal_iou()
 
     mean = np.array([[[124.55, 118.90, 102.94]]])
     std  = np.array([[[ 56.77,  55.97,  57.50]]])
@@ -105,9 +102,11 @@ for dataset in test_datasets:
         res = sal
         res = np.array(res)
 
+        ##########save results
         res_s = cv2.resize(res, dsize=(shape[1], shape[0]), interpolation=cv2.INTER_LINEAR)
         fname = save_path + name
         cv2.imwrite(fname, np.uint8(res_s*255))
+        ##########save results
         
         ##########crf
         res = np.asarray(res*255, np.uint8)
