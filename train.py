@@ -43,7 +43,7 @@ def train(Dataset, Network, savepath):
     train_path = '/data2/data/hkl/Data/Kvasir-CVC612-MSNet/TrainDataset'
 
     cfg = Dataset.Config(datapath=train_path, savepath=savepath,\
-    mode='train', batch=16, lr=0.04, momen=0.9, decay=5e-4, epoch=50)
+    mode='train', batch=16, lr=0.05, momen=0.9, decay=5e-4, epoch=50)
 
     data = Dataset.Data(cfg)
     loader = DataLoader(data, collate_fn=data.collate, batch_size=cfg.batch, shuffle=True, num_workers=4)
