@@ -40,7 +40,7 @@ class ToTensor(object):
 path=(['./saved_model/model-50']) 
 
 
-dir = '/data2/data/hkl/Data/Kvasir-CVC612-MSNet/TestDataset/'
+dir = './data/TestDataset/'
 dcnt = 0
 
 
