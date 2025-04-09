@@ -2,7 +2,6 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from model.res2net import res2net50_v1b_26w_4s
-# from res2net import res2net50_v1b_26w_4s
 import torchvision
 
 
