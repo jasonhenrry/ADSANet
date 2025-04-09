@@ -40,7 +40,7 @@ scaler = amp.GradScaler(enabled=use_fp16)
 dataset_medical.epochnum = 1
 def train(Dataset, Network, savepath):
     ## dataset
-    train_path = '/data2/data/hkl/Data/Kvasir-CVC612-MSNet/TrainDataset'
+    train_path = './data/TrainDataset'
 
     cfg = Dataset.Config(datapath=train_path, savepath=savepath,\
     mode='train', batch=16, lr=0.05, momen=0.9, decay=5e-4, epoch=50)
@@ -98,10 +98,5 @@ def train(Dataset, Network, savepath):
 
 
 if __name__=='__main__':
-    # paths=('./saved_model/AblationADFM-50epoch-1', 
-    # './saved_model/AblationADFM-50epoch-3')
-    paths='./saved_model/AblationADFM-50epoch-1'
-    train(dataset_medical, ADSANet, paths)
-    
-    # for id in range(0,len(paths)):
-    #     train(dataset_medical, MSNet, LossNet, paths[id])
+    path='./saved_model'
+    train(dataset_medical, ADSANet, path)
