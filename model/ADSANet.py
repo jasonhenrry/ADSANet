@@ -103,15 +103,8 @@ class ADSANet(nn.Module):
 
 if __name__ == '__main__':
     ras = ADSANet().cuda()
-    # input_tensor = torch.randn(1, 3, 352, 352).cuda()
-    # out = ras(input_tensor)
     
     from ptflops import get_model_complexity_info
-    # from pytorch_model_summary import summary
 
-    # out1, out2, out3 = model(dummy_input)
-    # print('Model output shape :', out1.size())
-    # print('Model output shape :', out2.size())
-    # ptflops
     macs, params = get_model_complexity_info(ras, (3, 352, 352), as_strings=True, print_per_layer_stat=True)
     print('macs: ', macs, 'params: ', params)  # flops = macs*2
