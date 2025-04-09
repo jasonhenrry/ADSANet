@@ -7,7 +7,7 @@ The testing dataset can be found in this [Google Drive Link (327.4MB)](https://d
 It contains five sub-datsets: ETIS (196 test samples), ClinicDB (62 test samples), Endoscene (60 test samples), ColonDB (380 test samples),  Kvasir-SEG (100 test samples).
 
 # Results
-You can download the results at [Google Drive Link](https://drive.google.com/file/d/1l-cRP2PYr5WdFwUaZzKWBwVN_oWdDByz/view?usp=drive_link)
+You can download the results at [Google Drive Link](https://drive.google.com/file/d/1RmyEm7X-rnZFc5F2VGFToioFINsyfwXD/view?usp=drive_link)
 
 # Trained Model
 You can download the trained ADSANet model at [Google Drive Link](https://drive.google.com/file/d/1eaAB2q_2MgdJmfduC7gv7WesSigc_sgc/view?usp=drive_link)
