@@ -10,7 +10,7 @@ import torch.nn.functional as F
 import os
 from utils.misc import crf_refine
 
-test_datasets = ['CVC-ColonDB', 'ETIS-LaribPolypDB', 'Kvasir', 'CVC-300', 'CVC-ClinicDB']
+test_datasets = ['ColonDB', 'ETIS', 'Kvasir-SEG', 'Endoscene', 'ClinicDB']
 
 class Normalize(object):
     def __init__(self, mean, std):
