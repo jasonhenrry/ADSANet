@@ -63,33 +63,42 @@ class ADSANet(nn.Module):
         x3_dem_1 = self.x3_dem_1(x3)
         x2_dem_1 = self.x2_dem_1(x2)
 
+        #SAM module
         out5 = F.interpolate(x5_dem_1, size=x3.size()[2:], mode='bilinear', align_corners=True)
         out4 = F.interpolate(x4_dem_1, size=x3.size()[2:], mode='bilinear', align_corners=True)
         pred = torch.cat([out5, out4*out5, x3_dem_1*out4*out5], dim=1)
         
         pred = self.predict(pred)
+        #SAM module
 
+        #ADFM module: 5-4
         x5_4 = self.x5_x4(abs(F.upsample(x5_dem_1,size=x4.size()[2:], mode='bilinear')-x4_dem_1))
         level4 = torch.cat((x5_4, (F.upsample(x5_dem_1,size=x5_4.size()[2:], mode='bilinear'))), 1)
         output4 = self.output4_c(torch.cat((self.level4concatconv(level4), x4_dem_1), 1))
+        #ADFM module: 5-4
 
+        #ADFM module: 4-3
         x4_3 = self.x4_x3(abs(F.upsample(output4,size=x3.size()[2:], mode='bilinear')-x3_dem_1))
         level3 = self.level3(x4_3)
         x5_4_3 = self.x5_x4_x3(abs(F.upsample(x5_4, size=x4_3.size()[2:], mode='bilinear') - level3))
         output3 = self.output3_c(torch.cat((self.level3concatconv(torch.cat((x5_4_3, level3, F.upsample(output4,size=level3.size()[2:], mode='bilinear')), 1)), x3_dem_1), 1))
+        #ADFM module: 4-3
 
+        #ADFM module: 3-2
         x3_2 = self.x3_x2(abs(F.upsample(output3,size=x2.size()[2:], mode='bilinear')-x2_dem_1))
         level2 = self.level2(x3_2)
         x4_3_2 = self.x4_x3_x2(abs(F.upsample(level3, size=x3_2.size()[2:], mode='bilinear') - level2))
         output2 = self.output2_c(torch.cat((self.level2concatconv(torch.cat((x4_3_2, level2, F.upsample(output3,size=level2.size()[2:], mode='bilinear')), 1)), x2_dem_1), 1))
+        #ADFM module: 3-2
 
+        #ADFM module: 2-1
         x2_1 = self.x2_x1(abs(F.upsample(output2,size=x1.size()[2:], mode='bilinear')-x1))
         level1 = self.level1(x2_1)
         x3_2_1 = self.x3_x2_x1(abs(F.upsample(level2, size=x2_1.size()[2:], mode='bilinear') - level1))
-        
         level1 = torch.cat((x3_2_1, level1, F.upsample(output2,size=level1.size()[2:], mode='bilinear')), 1)
         output1 = self.output1_1(self.level1concatconv(level1))
         output1 = self.output1(output1)
+        #ADFM module: 2-2
 
         fpred = torch.cat([F.upsample(pred, size=level1.size()[2:], mode='bilinear'), output1], dim=1)
         fpred = self.foutput_c(fpred)
