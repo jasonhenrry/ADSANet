@@ -117,6 +117,7 @@ class Data(Dataset):
         global epochnum
         name  = self.samples[idx]
 
+        # Color exchange with region suppressing
         image = cv2.imread(self.root+'/image/'+name+'.png')
         imaget = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         imaget = np.float32(imaget)
@@ -168,6 +169,7 @@ class Data(Dataset):
         image_ce = np.uint8(image_ce*(maskc/255) + image*((255-maskc)/255))
         image = cv2.cvtColor(image_ce, cv2.COLOR_LAB2RGB)
         image = np.asarray(image, np.float32)
+        # Color exchange with region suppressing
        
         shape = mask.shape
 
