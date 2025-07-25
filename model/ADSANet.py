@@ -98,7 +98,7 @@ class ADSANet(nn.Module):
         level1 = torch.cat((x3_2_1, level1, F.upsample(output2,size=level1.size()[2:], mode='bilinear')), 1)
         output1 = self.output1_1(self.level1concatconv(level1))
         output1 = self.output1(output1)
-        #ADFM module: 2-2
+        #ADFM module: 2-1
 
         fpred = torch.cat([F.upsample(pred, size=level1.size()[2:], mode='bilinear'), output1], dim=1)
         fpred = self.foutput_c(fpred)
