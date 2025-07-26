@@ -17,3 +17,6 @@ Python 3.11
 Pytorch 2.3.1  
 OpenCV 4.10  
 Numpy 1.26  
+
+
+Note that the model implementation is adapted to the layer-wise output dimensions of the ResNet backbone. When replacing the backbone with a different network, modifications to some feature fusion layers may be necessary to ensure tensor dimension compatibility.
